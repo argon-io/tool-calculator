@@ -35,15 +35,15 @@ jobs:
           zip -r ../dist.zip .
           cd ../
 
-      - name: Bump version
-        run: |
-          pnpm version patch -m "Release v%s" # You can change 'patch' to 'minor' or 'major' depending on your needs
-          git push --follow-tags
+      # - name: Bump version
+      #   run: |
+      #     pnpm version patch -m "Release v%s" # You can change 'patch' to 'minor' or 'major' depending on your needs
+      #     git push --follow-tags
 
-      - name: Create GitHub Release
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          gh release create "v$VERSION" dist/index.js --title "v$VERSION" --notes "Release version $VERSION" --prerelease
+      # - name: Create GitHub Release
+      #   run: |
+      #     VERSION=$(node -p "require('./package.json').version")
+      #     gh release create "v$VERSION" dist/index.js --title "v$VERSION" --notes "Release version $VERSION" --prerelease
 
       - name: Check if function is existing or new
         uses: scaleway/action-scw@v0
