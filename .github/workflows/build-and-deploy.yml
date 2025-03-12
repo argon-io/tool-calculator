@@ -53,9 +53,10 @@ jobs:
           secret-key: ${{ secrets.SCW_SECRET_KEY }}
           default-organization-id: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
           default-project-id: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
-          args: function function list \
-            name=${{ github.event.repository.name }} \
-            region=fr-par
+          args:
+            function function list
+              name=${{ github.event.repository.name }}
+              region=fr-par
 
       - name: Create New Function
         if: ${{ steps.cli.outputs.json == '[]' }}
@@ -67,17 +68,17 @@ jobs:
           default-organization-id: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
           default-project-id: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
           args:
-            function function create \
-              namespace-id=${{ secrets.SCW_FUNCTION_TOOLS_NAMESPACE_ID }} \
-              name=${{ github.event.repository.name }} \
-              min-scale=0 \
-              max-scale=10 \
-              runtime=node22 \
-              memory-limit=256 \
-              timeout=10s \
-              handler=index.handler \
-              privacy=public \
-              sandbox=v2 \
+            function function create
+              namespace-id=${{ secrets.SCW_FUNCTION_TOOLS_NAMESPACE_ID }}
+              name=${{ github.event.repository.name }}
+              min-scale=0
+              max-scale=10
+              runtime=node22
+              memory-limit=256
+              timeout=10s
+              handler=index.handler
+              privacy=public
+              sandbox=v2
               region=fr-par
 
       - name: Deploy Function
@@ -88,8 +89,9 @@ jobs:
           secret-key: ${{ secrets.SCW_SECRET_KEY }}
           default-organization-id: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
           default-project-id: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
-          args: function function deploy \
-            name=${{ github.event.repository.name }} \
-            runtime=node22 \
-            zip=dist.zip \
-            region=fr-par
+          args:
+            function function deploy
+              name=${{ github.event.repository.name }}
+              runtime=node22
+              zip=dist.zip
+              region=fr-par
