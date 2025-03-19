@@ -45,7 +45,8 @@ jobs:
       #     VERSION=$(node -p "require('./package.json').version")
       #     gh release create "v$VERSION" dist/index.js --title "v$VERSION" --notes "Release version $VERSION" --prerelease
 
-      - name: Check if function is existing or new
+      - name: Get Existing Function ID
+        id: existing-functions
         uses: scaleway/action-scw@v0
         with:
           version: v2.37.0
@@ -58,8 +59,12 @@ jobs:
               name=${{ github.event.repository.name }}
               region=fr-par
 
+      - name: Get Existing Function ID
+        id: function-id
+        run: echo ${{ fromJSON(steps.existing-functions.outputs.json)[0].id }} >> $GITHUB_OUTPUT
+
       - name: Create New Function
-        if: ${{ steps.cli.outputs.json == '[]' }}
+        if: ${{ steps.function-id.outputs == '' }}
         uses: scaleway/action-scw@v0
         with:
           version: v2.37.0

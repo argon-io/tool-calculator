@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "outDir": "dist", // Output folder for compiled JavaScript
-    "rootDir": "src", // Source TypeScript files
-    "module": "CommonJS", // CommonJS module system
-    "target": "ES6", // Target ECMAScript version
-    "strict": true
+    "outDir": "dist",
+    "rootDir": "src",
+    "module": "CommonJS",
+    "target": "ES6",
+    "strict": true,
+    "esModuleInterop": true,
   },
   "include": [
     "src"
-  ] // Ensure only the src folder is compiled
+  ]
 }
